@@ -300,13 +300,13 @@ function MainPage({ _item, navigation }) {
     useEffect(() => {
         fetchData()
     }, [])
-    const categories = [...new Set(data.map((item) => item.category))];
+    const categories = [...new Set(data?.map((item) => item.category))];
     const [textInput, setTextInput] = useState('');
-    const matchCheck = textInput.toUpperCase();
-    cart = data.filter((i) => {
+    const matchCheck = textInput?.toUpperCase();
+    cart = data?.filter((i) => {
         return i.checkState === true && i.cost > 0;
     });
-    expense = cart.reduce((acc, i) => {
+    expense = cart?.reduce((acc, i) => {
         return (
             acc + (i.maxi_price * i.maxi_quantity + i.mini_price * i.mini_quantity)
         );

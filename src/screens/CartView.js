@@ -101,6 +101,7 @@ export default function CartView({ cart, expense }) {
                 title="Checkout"
                 onPress={() => { openPaymentSheet(); }}
             />
+            <Button title="test" onPress={() => {saveOrder()}}/>
         </>
     )
 }

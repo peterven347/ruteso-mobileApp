@@ -12,10 +12,10 @@ const passwordRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".
 export default function SignUp({navigation}) {
     const { setToken, setuserName, url } = useContext(Context)
     const [user, setUser] = useState({
-        firstname: "testname",
+        firstName: "testname",
         lastname: "testname",
         address: "testnameaddress",
-        email: "peter@gmail.com",
+        eMail: "peter1@gmail.com",
         phonenumber: 12345678,
         password:"1qasw23edfr4"
     })
@@ -35,7 +35,8 @@ export default function SignUp({navigation}) {
     }
     
     const verify = () => {
-        return (nameRegex.test(firstname) && nameRegex.test(lastname) && address && emailRegex.test(email) && phonenumber && passwordRegex.test(password))
+        return true
+        // return (nameRegex.test(firstname) && nameRegex.test(lastname) && address && emailRegex.test(email) && phonenumber && passwordRegex.test(password))
     }
 
     const register = async () => {
@@ -57,19 +58,19 @@ export default function SignUp({navigation}) {
 
     return (
         <>
-        <ImageBackground source={b_img} style={{flex: 1,}} resizeMode="cover">
+        <ImageBackground source={b_img} style={{flex: 1,}} resizeMode="cover" blurRadius={5}>
             <View style={{ marginTop: 54, width: "80%",alignSelf: "center", flex: 1 }}>
-                <TextInput style={{ color: "black", backgroundColor: "white", width: "100%", height: 50, borderRadius: 6, fontSize: 14, marginBottom: 14}} placeholder="Name" placeholderTextColor= "#ccc" onChangeText={e => { setUser((prev) => ({...prev, e})) }} maxLength={40}></TextInput>
-                <TextInput style={{ color: "black", backgroundColor: "white", width: "100%", height: 50, borderRadius: 6, fontSize: 14, marginBottom: 14 }} placeholder="Email" placeholderTextColor= "#ccc" onChangeText={e => { setUser((prev) => ({...prev, e})) }} maxLength={40}></TextInput>
+                <TextInput style={{ color: "black", backgroundColor: "white", width: "100%", height: 50, borderRadius: 6, fontSize: 14, marginBottom: 14}} placeholder="Name" placeholderTextColor= "#ccc" onChangeText={e => { setUser((prev) => ({...prev, firstName:e})) }} maxLength={40}></TextInput>
+                <TextInput style={{ color: "black", backgroundColor: "white", width: "100%", height: 50, borderRadius: 6, fontSize: 14, marginBottom: 14 }} placeholder="Email" placeholderTextColor= "#ccc" onChangeText={e => { setUser((prev) => ({...prev, eMail:e})) }} maxLength={40}></TextInput>
                 <View>
-                    <TextInput style={{backgroundColor: "white", width:"100%", height: 50, borderRadius: 6, fontSize: 14}} {...passwordProp} onChangeText={e => { setUser((prev) => ({...prev, e})) }} maxLength={40}></TextInput>
-                    <Mci name={hidePassword? "eye" : "eye-off"} size={20} style={{ position: "absolute", right: 10, top: 14, marginStart: 30 }} onPress={() =>{setHidePassword(!hidePassword)}}/>
+                    <TextInput style={{backgroundColor: "white", width:"100%", height: 50, borderRadius: 6, fontSize: 14}} {...passwordProp} onChangeText={e => { setUser((prev) => ({...prev, password:e})) }} maxLength={40}></TextInput>
+                    <Mci name={hidePassword? "eye" : "eye-off"} size={20} color="#444" style={{ position: "absolute", top: 14, marginStart: 284 }} onPress={() =>{setHidePassword(!hidePassword)}}/>
                 </View>
                 <View style={{width: "100%", height: 120}}></View>
                 <View>
-                    <Button color="#f44" title="Create Account" onPress={register} />
+                    <Button color="#a0a" title="Create Account" onPress={register} />
                     <Text style={{marginTop: 20, color: "#ddd", fontWeight: "bold"}}>Already have an Account?</Text>
-                    <Button color="#f44" title=" SIGN IN" onPress={() => navigation.navigate("Sign In")} />
+                    <Button color="#a0a" title=" SIGN IN" onPress={() => navigation.navigate("Sign In")} />
                 </View>
             </View>
         </ImageBackground>

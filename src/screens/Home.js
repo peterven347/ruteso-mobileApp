@@ -44,764 +44,763 @@ function Dashboard({ navigation }) {
     const layout = useWindowDimensions();
     const name = userName.charAt(0).toUpperCase() + userName.slice(1)
     const [index, setIndex] = useState(0);
-    const [modalView, setModalView] = useState(null)
     const [balVisible, setBalVisible] = useState(false)
     const [history, setHistory] = useState({
-        // "Fri Apr 05 2027": [
-        //     [
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "Total_Cost": 93,
-        //             // "state"
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "Total_Cost": 44
-        //         },
-        //         {
-        //             "state": "completed"
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "Total_Cost": 44
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "cereal",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "cereal",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 10
-        //         }
-        //     ]
-        // ],
-        // "Wed Apr 01 2027": [
-        //     [
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 49
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 49
-        //         }
-        //     ]
-        // ],
-        // "Thurs Apr 02 2027": [
-        //     [
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 49
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 49
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 54
-        //         }
-        //     ]
-        // ],
-        // "Tue May 07 2027": [
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "Total_Cost": 49
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 54
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 54
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 54
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 54
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 54
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 54
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "cereal",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "cereal",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 59
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "cereal",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "cereal",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 59
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "cereal",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "cereal",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 59
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "cereal",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "cereal",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 59
-        //         }
-        //     ],
-        //     [
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "cereal",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "cereal",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "name": "dsssxd",
-        //             "mini_unit": "litre",
-        //             "mini_price": 44,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "litre",
-        //             "maxi_price": 54,
-        //             "maxi_quantity": 0,
-        //             "category": "tuber",
-        //             "cost": 44
-        //         },
-        //         {
-        //             "name": "ann",
-        //             "mini_unit": "ann",
-        //             "mini_price": 5,
-        //             "mini_quantity": 1,
-        //             "maxi_unit": "ann",
-        //             "maxi_price": 5,
-        //             "maxi_quantity": 0,
-        //             "category": "ann",
-        //             "cost": 5
-        //         },
-        //         {
-        //             "Total_Cost": 59
-        //         }
-        //     ]
-        // ]
+        "Fri Apr 05 2027": [
+            [
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "Total_Cost": 93,
+                    // "state"
+                }
+            ],
+            [
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "Total_Cost": 44
+                },
+                {
+                    "state": "completed"
+                }
+            ],
+            [
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "Total_Cost": 44
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "cereal",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "cereal",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 10
+                }
+            ]
+        ],
+        "Wed Apr 01 2027": [
+            [
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 49
+                }
+            ],
+            [
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 49
+                }
+            ]
+        ],
+        "Thurs Apr 02 2027": [
+            [
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 49
+                }
+            ],
+            [
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 49
+                }
+            ],
+            [
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 54
+                }
+            ]
+        ],
+        "Tue May 07 2027": [
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "Total_Cost": 49
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 54
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 54
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 54
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 54
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 54
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 54
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "cereal",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "cereal",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 59
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "cereal",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "cereal",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 59
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "cereal",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "cereal",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 59
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "cereal",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "cereal",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 59
+                }
+            ],
+            [
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "name": "cereal",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "cereal",
+                    "cost": 5
+                },
+                {
+                    "name": "dsssxd",
+                    "mini_unit": "litre",
+                    "mini_price": 44,
+                    "mini_quantity": 1,
+                    "maxi_unit": "litre",
+                    "maxi_price": 54,
+                    "maxi_quantity": 0,
+                    "category": "tuber",
+                    "cost": 44
+                },
+                {
+                    "name": "ann",
+                    "mini_unit": "ann",
+                    "mini_price": 5,
+                    "mini_quantity": 1,
+                    "maxi_unit": "ann",
+                    "maxi_price": 5,
+                    "maxi_quantity": 0,
+                    "category": "ann",
+                    "cost": 5
+                },
+                {
+                    "Total_Cost": 59
+                }
+            ]
+        ]
     })
     let historyArray = Object.entries(history).map(([date, orders]) => ({
         date,
@@ -832,18 +831,16 @@ function Dashboard({ navigation }) {
 
     const [routes] = useState([
         { key: 'second', title: 'Crops in Season' },
-        { key: 'third', title: 'test'},
         { key: 'first', title: 'History' },
+        { key: 'third', title: 'test'},
     ]);
 
     return (
         <>
-            <View>{modalView}</View>
             <View style={styles.topView}>
-                <Text style={{ fontWeight: "bold", fontSize: 16, color: "#444" }}>Hello, P{name.toUpperCase()}TER</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 16, color: "#444" }}>Hello, {name}</Text>
                 {/* <Text style={{ fontWeight: "bold", fontSize: 16, color: "#444" }}>Hello, {name.toUpperCase()}</Text> */}
                 <TouchableOpacity>
-                    {/* <View></View> */}
                     <Ion name="notifications" size={20} color="#444" />
                     <View style={{ width: 16, height: 16, borderRadius: 50, backgroundColor: "#eee", position: "relative", top: -28, left: 12 }}>
                         <Text style={{ color: "#f55", fontSize: 13, fontWeight: "bold", alignSelf: "center", paddingEnd: 4, paddingTop:2 }}>{9}</Text>
@@ -866,7 +863,7 @@ function Dashboard({ navigation }) {
             <TabView
                 navigationState={{ index, routes }}
                 renderScene={SceneMap({
-                    first: () => <History history={history} historyArray={historyArray} fetchHistory={fetchHistory} setModalView={setModalView}/>,
+                    first: () => <History history={history} historyArray={historyArray} fetchHistory={fetchHistory}/>,
                     second: () => <CropsInSeason/>,
                     third: () => <Third/>
                 })}

@@ -26,7 +26,7 @@ function Divider(props){
 function DrawerItem(props){
     return(
         <>
-        <TouchableOpacity style={{paddingStart: 6, flexDirection: "row"}} onPress={() => {props.navigateFn()}}>
+        <TouchableOpacity style={{paddingStart: 16, flexDirection: "row", alignItems: "center"}} onPress={() => {props.navigateFn()}}>
             <props.Icon name={props.icon} color="rgb(237, 130, 7)" size={24} style={{width: 25, height: 25, backgroundColor: "#fff", borderRadius: 50}}/>
             <Text style={{fontSize: 16, marginHorizontal: 2, fontWeight: 400, paddingStart: 8, color: "#444"}}>{props.name}</Text>
         </TouchableOpacity>
@@ -52,12 +52,13 @@ export default function DrawerVieww({navigation}){
                 <DrawerItem Icon={Ion} icon="people" name="Beneficiaries" navigateFn= {() => navigateScr("St")}/>
                 <DrawerItem Icon={Mci} icon="account-star" name="Register as a Vendor" navigateFn= {() => navigateScr("St")}/>
 
-                <Divider color="orange"/>
+                <Divider color="#ccc"/>
                 <Button
-                    textColor="orange"
-                    rippleColor="orange"
-                    icon="arrow-right-thin"
+                    textColor="#f44"
+                    rippleColor="#ccc"
+                    icon="arrow-left-thin"
                     mode="text"
+                    direction='ltr'
                     onPress={() => {resetGenericPassword(); setToken(null);}}>
                     Sign out
                 </Button>

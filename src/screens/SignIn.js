@@ -27,7 +27,7 @@ export function SignIn({navigation}){
     }
 
     const login = async () => {
-        const val = await fetch(`${url}/login`, {
+        const val = await fetch(`${url}/logiin`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -41,28 +41,27 @@ export function SignIn({navigation}){
         await Keychain.setGenericPassword(firstName, token)
         setToken(token)
         setuserName(firstName)
+        console.log(firstName)
     }
 
     return(
         <>
-        <ImageBackground source={b_img} style={{flex: 1,}} resizeMode="cover">
+        <ImageBackground source={b_img} style={{flex: 1,}} resizeMode="cover" blurRadius={5}>
             <View style={{marginTop: 16, width:"80%", height: "50%", alignSelf:"center", justifyContent:"space-evenly"}}>
                 <TextInput style={{color: "black", backgroundColor: "#fff", width:"100%", height: 50, borderRadius: 6, fontSize: 14}} placeholder="Email" placeholderTextColor= "#ccc" onChangeText={e => setEMail(e)} maxLength={40}></TextInput>
                 <View>
                     <TextInput style={{color: "black", backgroundColor: "white", width:"100%", height: 50, borderRadius: 6, fontSize: 14}} {...passwordProp} onChangeText={e => setPassword(e)} maxLength={40}></TextInput>
-                    <Mci name={hidePassword? "eye" : "eye-off"} size={20} color="#666" style={{ position: 'absolute', left: 18, top: 14 }} onPress={() =>{setHidePassword(!hidePassword)}}/>
-                </View>
-                <View style={{flexDirection: "row", justifyContent:"space-between", marginVertical: 20}}>
-                    <View style={{flexDirection: "row"}}>
-                        {/* <Mci name={rememberMe? "checkbox-marked": "checkbox-blank-outline"} size={20} onPress={() => {setRememberMe(!rememberMe)}}/>
-                        <Text>Remember me</Text> */}
-                    </View>
+                    <Mci name={hidePassword? "eye" : "eye-off"} size={20} color="#444" style={{ position: 'absolute', top: 14, marginStart: 284 }} onPress={() =>{setHidePassword(!hidePassword)}}/>
                     <TouchableOpacity onPress={() => navigation.navigate("Reset Password")}>
-                        <Text style={{color: "#ddd", fontWeight: "bold"}}>Forgot Password?</Text>
+                        <Text style={{color: "#ddd", fontWeight: "bold", marginStart:"auto", paddingTop: 8}}>Forgot Password?</Text>
                     </TouchableOpacity>
                 </View>
-                <Button color="#f44" title="Sign In" onPress={login}/>
-                <Button color="#f44" title="Sign Up" onPress={() => navigation.navigate("Sign Up")}/>
+                <View style={{flexDirection: "row", justifyContent:"space-between", marginBottom: 40}}>
+                </View>
+                <Button color="#a0a" title="Submit" onPress={login}/>
+                <Button color="#a0a" title="Sign Up" onPress={() => navigation.navigate("Sign Up")}>
+                    <Mci name="eye" color="#a0a"/>
+                </Button>
             </View>
         </ImageBackground>
         </>
@@ -80,7 +79,7 @@ export function ForgotPassword({navigation}){
                 <Text>E-mail</Text>
                 <TextInput style={{width:"100%", borderBottomWidth: 1, textAlignVertical:"bottom", padding: 0, fontSize: 16}} autoCorrect={false} placeholder="your E-mail address" maxLength={40}></TextInput>
                 <View style={{margin: 30, alignSelf:"center"}}>
-                    <Button color="#f33" title="Submit" />
+                    <Button color="#a0a" title="Submit" />
                 </View>
             </View>
         </ImageBackground>

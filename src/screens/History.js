@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, FlatList, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { ActivityIndicator, FlatList, Modal, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import HistoryModal from './HistoryModal';
+import { Context } from '../../Squarepay';
+import { Button } from 'react-native-paper';
 
 const renderModal = ({item, setModalView}) => {
     if (item.date == item.date) {
@@ -17,10 +19,12 @@ const renderItem = ({ item, setModalView }) => {
     // let date = new Date(Date.now()).toUTCString()
     // let time = date.split(' ').slice(4, 5).join(' ');
     // date = date.split(' ').slice(1, 4).join(' ');
-    let expenseArray = item.orders.flat().filter(i => {
-        return i.hasOwnProperty("Total_Cost")
-    });
-    let total_expense = expenseArray.reduce((acc, i) => {
+
+    let expenseArray = Array.isArray(item?.orders) 
+    ? item.orders.flat().filter(i => i?.hasOwnProperty("Total_Cost")) 
+    : [];
+  
+    let total_expense = expenseArray?.reduce((acc, i) => {
         return acc + i.Total_Cost
     }, 0);
     return (
@@ -44,37 +48,40 @@ const renderItem = ({ item, setModalView }) => {
     )
 }
 
-export default function History ({history, historyArray, fetchHistory, setModalView}){
+export default function History ({history, historyArray, fetchHistory}){
     const [showIndicator, setShowIndicator] = useState(true);
+    const [modalView, setModalView] = useState(null)
 
     useEffect(() => {
       const timer = setTimeout(() => {
         setShowIndicator((prev) => (!prev));
-      }, 10000); 
-  
-      return () => clearTimeout(timer); // Cleanup the timer on unmount
+      }, 15000);  
+      return () => clearTimeout(timer);
     }, []);
 
     return (
-        <View style={styles.history}>
-        <FlatList
-            data={historyArray}
-            renderItem={(props) => renderItem({...props, setModalView})}
-            onRefresh={() => {
-                fetchHistory()
-            }}
-            refreshing={!history}
-            keyExtractor={(item) => item.date}
-            style={{ paddingBottom: 2 }}
-            ListEmptyComponent={ () => {
-                return showIndicator? (
-                    <View style={{ marginTop: 140 }}>
-                        <ActivityIndicator size={56} color="#ffa500" />
-                    </View>
-                ) : <Text style={{color: "#888", alignSelf: "center"}}>An error occured</Text>
-            }}
-            />
-    </View>
+        <>
+            <View>{modalView}</View>
+            <View style={styles.history}>
+                <FlatList
+                    data={historyArray}
+                    renderItem={(props) => renderItem({...props, setModalView})}
+                    onRefresh={() => {
+                        fetchHistory()
+                    }}
+                    refreshing={!history}
+                    keyExtractor={(item) => item.date}
+                    style={{ paddingBottom: 2 }}
+                    ListEmptyComponent={ () => {
+                        return showIndicator? (
+                            <View style={{ marginTop: 140 }}>
+                                <ActivityIndicator size={56} color="#ffa500" />
+                            </View>
+                        ) : <Text style={{color: "#888", alignSelf: "center"}}>An error occured</Text>
+                    }}
+                />
+            </View>
+            </>
 )}
 
 const styles = StyleSheet.create({
@@ -91,7 +98,8 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "auto",
         paddingVertical: 2,
-        paddingHorizontal: "2%",
+        paddingLeft: "2%",
+        paddingRight: "4%",
         marginBottom: 2,
         display: "flex",
         flexDirection: "row",

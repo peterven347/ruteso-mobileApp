@@ -1,108 +1,103 @@
-import React from "react";
-import { Animated, FlatList, StyleSheet, View, Text } from "react-native";
-
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import React, { useState, useRef } from 'react';
+import { View, Text, Modal, FlatList, Image, TouchableOpacity, Animated, StyleSheet } from 'react-native';
 
 export default function Third() {
-    const rr = ({item}) => {
-        return(
-        <View style={{backgroundColor: "#f00", height: 48, margin: 8}}>
-          <Text style={{color: "black"}}>{item.a}</Text>
-        </View>
-        )
-    }
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const slideAnim = useRef(new Animated.Value(0)).current;
+
+  const data = [
+    { id: '1', image: 'https://via.placeholder.com/150', text: 'Item 1' },
+    { id: '2', image: 'https://via.placeholder.com/150', text: 'Item 2' },
+    // Add more items as needed
+  ];
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setModalVisible(true);
+
+    // Reset slide animation and start sliding in
+    slideAnim.setValue(0);
+    Animated.timing(slideAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity onPress={() => openModal(item.image)}>
+      <Image source={{ uri: item.image }} style={styles.image} />
+      <Text>{item.text}</Text>
+    </TouchableOpacity>
+  );
+
+  const renderModal = () => {
+    if (!selectedImage) return null;
+
+    const slideInStyle = {
+      transform: [{
+        translateY: slideAnim.interpolate({
+          inputRange: [0, 1],
+          outputRange: [500, 0] // Slide up from 500 units below to original position
+        }),
+      }],
+    };
+
+    return (
+      <Modal visible={modalVisible} transparent={true} animationType="none">
+        <TouchableOpacity style={styles.modalBackground} onPress={closeModal}>
+          <Animated.View style={[styles.modalContent, slideInStyle]}>
+            <Image source={{ uri: selectedImage }} style={styles.modalImage} />
+            <Text>Image Details</Text>
+          </Animated.View>
+        </TouchableOpacity>
+      </Modal>
+    );
+  };
+
   return (
-        <FlatList
-            data={[{a:1}, {a:2}]}
-            renderItem={rr}
-        />
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
+      {renderModal()}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 10,
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: 300,
+    height: 300,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalImage: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
   },
 });
-
-
-
-// import React from "react";
-// import { Animated, StyleSheet, View, Text } from "react-native";
-// import { RectButton } from "react-native-gesture-handler";
-// import Swipeable from "react-native-gesture-handler/Swipeable";
-
-// const Third = () => {
-//   const renderLeftActions = (progress, dragX) => {
-//     const trans = dragX.interpolate({
-//       inputRange: [0, 50, 51, 101],
-//       outputRange: [-20, 0, 0, 1],
-//     });
-//     const opacity = progress.interpolate({
-//       inputRange: [0, 1],
-//       outputRange: [0, 1],
-//     })
-
-//     return (
-//       <RectButton
-//       style={styles.leftAction}
-//       onPress={() => { /* Add your close logic here */ }}>
-//         <Animated.View
-//           style={[
-//             styles.actionView,
-//             {
-//               transform: [{ translateX: trans }],
-//               opacity: opacity
-//             },
-//           ]}
-//         >
-//             <View
-//                 style={styles.checkState}
-//                 onStartShouldSetResponder={() => {
-//                     // toggleItemSelection(item._id);
-//                 }}
-//                 >
-//             </View>
-//         </Animated.View>
-//       </RectButton>
-//     );
-//   };
-
-//   return (
-//     <Swipeable
-//       renderLeftActions={renderLeftActions}
-//       overshootLeft={false}
-//     >
-//       <View style={{height: 48, backgroundColor: "#fafef9"}}>
-//         <Text style={{color: "#444"}}>
-//           Peterven
-//         </Text>
-//       </View>
-//     </Swipeable>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   leftAction: {
-//     backgroundColor: "#ccc",
-//     justifyContent: 'center',
-//   },
-//   actionView: {
-//     color: 'white',
-//     fontWeight: '600',
-//     paddingHorizontal: 20,
-//   },
-//   checkState: {
-//       width: 20,
-//       height: 20,
-//       backgroundColor: "#cyan",
-//       borderColor: '#888',
-//       borderWidth: 4,
-//       borderRadius: 10,
-//   }
-// });
-
-// export default Third;
